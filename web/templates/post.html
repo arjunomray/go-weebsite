@@ -1,0 +1,15 @@
+{{ define "content" }}
+<article class="reading-view">
+  <header>
+    <a href="javascript:history.back()" class="console-link">[<- Back]</a>
+        <h1 style="margin: 15px 0 5px 0;">{{ .Title }}</h1>
+        <small style="color: var(--text-muted);">Compiled: {{ .Date.Format "2006-01-02" }}</small>
+  </header>
+
+  <hr style="border: 0; border-top: 1px dashed var(--border-soft); margin: 20px 0;">
+
+  <div class="markdown-body">
+    {{ .BodyHTML }}
+  </div>
+</article>
+{{ end }}

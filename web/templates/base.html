@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="/static/css/styles.css" />
+  <title>{{ .Title }}</title>
+  <script src="https://unpkg.com/htmx.org@2.0.0"></script>
+</head>
+
+<body hx-boost="true">
+  <div class="site-wrapper">
+    <header class="site-header">
+      <logo class="logo">arjun</logo>
+      <br>
+      {{ template "templates/components/lofi.html" . }}
+      {{ template "templates/components/nav.html" }}
+
+    </header>
+    <section>
+      <main class="main-content-card">
+        {{ block "content" . }}
+        {{ end }}
+      </main>
+    </section>
+    {{ template "templates/components/footer.html" }}
+  </div>
+
+</body>
+
+</html>

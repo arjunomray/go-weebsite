@@ -1,0 +1,27 @@
+{{ define "content" }}
+<div class="content-list-wrapper">
+  <h2>log_entries</h2>
+
+  {{ if .CurrentTag }}
+  <div style="margin-bottom: 20px; color: var(--accent);">
+    Active flag index: #{{ .CurrentTag }} <a href="/blogs"
+      style="color: var(--text-error); text-decoration: none;">[Clear]</a>
+  </div>
+  {{ end }}
+
+  <div class="index-grid">
+    {{ range .Posts }}
+    <div class="index-item">
+      <small class="item-date">{{ .Date.Format "2006-01-02" }}</small>
+      <h3><a href="/blog/{{ .Slug }}">{{ .Title }}</a></h3>
+      <p>{{ .Summary }}</p>
+      <div class="tags-row">
+        {{ range .Tags }}
+        <a href="/blogs?tag={{ . }}" class="tag-flag">#{{ . }}</a>
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

@@ -1,0 +1,81 @@
+{{ define "templates/components/lofi.html" }}
+<div class="lofi-widget">
+  <button id="lofi-toggle" class="lofi-btn" onclick="toggleLofi()">
+    [<span id="lofi-status">OFF</span>] lofi_player
+  </button>
+
+  <button id="lofi-next" class="lofi-btn skip-btn" onclick="skipTrack()" title="Skip Track">
+    [>>]
+  </button>
+
+  <audio id="lofi-player" preload="none"></audio>
+</div>
+
+<script>
+  const playlist = [
+    "/static/audio/track1.mp3",
+    "/static/audio/track2.mp3",
+    "/static/audio/track3.mp3",
+    "/static/audio/track4.mp3",
+    "/static/audio/track5.mp3",
+    "/static/audio/track6.mp3",
+    "/static/audio/track7.mp3",
+    "/static/audio/track8.mp3",
+    "/static/audio/track9.mp3",
+    "/static/audio/track10.mp3",
+  ];
+
+  let lastTrack = null;
+
+  function getRandomTrack() {
+    const choices = playlist.filter(track => track !== lastTrack);
+    const randomChoice = choices[Math.floor(Math.random() * choices.length)];
+    lastTrack = randomChoice;
+    return randomChoice;
+  }
+
+  function toggleLofi() {
+    const player = document.getElementById('lofi-player');
+    const status = document.getElementById('lofi-status');
+
+    if (!player.src) {
+      player.src = getRandomTrack();
+    }
+
+    if (player.paused) {
+      player.play().then(() => {
+        status.innerText = "PLAYING";
+        status.style.color = "#b8bb26"; // Gruvbox Green
+      }).catch(err => {
+        console.error("Audio playback failed:", err);
+      });
+    } else {
+      player.pause();
+      status.innerText = "OFF";
+      status.style.color = "";
+    }
+  }
+
+  // The New Skip Logic Execution Function
+  function skipTrack() {
+    const player = document.getElementById('lofi-player');
+    const status = document.getElementById('lofi-status');
+
+    // Load a brand new random file track destination string
+    player.src = getRandomTrack();
+
+    // Force play the clean track connection immediately
+    player.play().then(() => {
+      status.innerText = "PLAYING";
+      status.style.color = "#b8bb26";
+    }).catch(err => {
+      console.error("Skip action playback failed:", err);
+    });
+  }
+
+  // Maintain automatic queue transition fallback loop 
+  document.getElementById('lofi-player').addEventListener('ended', function () {
+    skipTrack();
+  });
+</script>
+{{ end }}
