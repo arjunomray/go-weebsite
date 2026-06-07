@@ -12,7 +12,7 @@ COPY . .
 # 3. Build the Go binary directly inside the container footprint
 RUN go build -o /server ./cmd/*.go
 
-EXPOSE 8080
+EXPOSE 8000
 
 # 4. Boot up the freshly compiled application
 CMD ["/server"]
