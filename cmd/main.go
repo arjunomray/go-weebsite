@@ -62,7 +62,7 @@ func main() {
 	handler.HandleFunc("GET /library/", app.LibraryPostHandler)
 
 	s := &http.Server{
-		Addr:           ":8080",
+		Addr:           ":8000",
 		Handler:        wrapped,
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
