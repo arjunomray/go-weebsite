@@ -79,10 +79,22 @@ func InitContentDatabase(dirPath string) ([]ContentItem, error) {
 			}
 		}
 
+		// Only publish items explicitly marked as published
+		if item.Stage != "published" {
+			continue
+		}
+
 		// Transpile raw Markdown bytes directly to HTML string structures
 		var buf bytes.Buffer
 		if err := goldmark.Convert([]byte(markdownBody), &buf); err == nil {
 			item.BodyHTML = buf.String()
+		}
+
+		// Compute reading time: ~200 words per minute
+		wordCount := len(strings.Fields(markdownBody))
+		item.ReadingTime = wordCount / 200
+		if item.ReadingTime < 1 {
+			item.ReadingTime = 1
 		}
 
 		items = append(items, item)

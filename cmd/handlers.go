@@ -57,7 +57,9 @@ func (app *App) HealthHandler(w http.ResponseWriter, r *http.Request) {
 
 func (app *App) HomeHandler(w http.ResponseWriter, r *http.Request) {
 	pageData := PageData{
-		Title: "Home",
+		Title:       "Home",
+		Description: "Software developer from India. I build things, read books, and meditate.",
+		Page:        "home",
 	}
 	app.Render(w, "templates/home.html", pageData)
 }
@@ -66,7 +68,8 @@ func (app *App) HomeHandler(w http.ResponseWriter, r *http.Request) {
 func (app *App) BlogListHandler(w http.ResponseWriter, r *http.Request) {
 	tag := r.URL.Query().Get("tag")
 	app.Render(w, "templates/blogs.html", map[string]any{
-		"Title": "blogs", "Posts": filterContent(BlogPosts, tag), "CurrentTag": tag,
+		"Title": "blogs", "Description": "Thoughts, notes and writing from Arjun.",
+		"Page": "blogs", "Posts": filterContent(BlogPosts, tag), "CurrentTag": tag,
 	})
 }
 
@@ -74,7 +77,8 @@ func (app *App) BlogListHandler(w http.ResponseWriter, r *http.Request) {
 func (app *App) LibraryListHandler(w http.ResponseWriter, r *http.Request) {
 	tag := r.URL.Query().Get("tag")
 	app.Render(w, "templates/library.html", map[string]any{
-		"Title": "library", "Media": filterContent(LibraryItems, tag), "CurrentTag": tag,
+		"Title": "library", "Description": "Books and media that shaped my thinking.",
+		"Page": "library", "Media": filterContent(LibraryItems, tag), "CurrentTag": tag,
 	})
 }
 
@@ -84,9 +88,12 @@ func (app *App) BlogPostHandler(w http.ResponseWriter, r *http.Request) {
 		if post.Slug == slug {
 			// Cast post.BodyHTML to template.HTML so Go knows it's safe execution data
 			app.Render(w, "templates/post.html", map[string]any{
-				"Title":    post.Title,
-				"Date":     post.Date,
-				"BodyHTML": template.HTML(post.BodyHTML),
+				"Title":       post.Title,
+				"Description": post.Summary,
+				"Date":        post.Date,
+				"ReadingTime": post.ReadingTime,
+				"Page":        "blogs",
+				"BodyHTML":    template.HTML(post.BodyHTML),
 			})
 			return
 		}
@@ -100,9 +107,12 @@ func (app *App) LibraryPostHandler(w http.ResponseWriter, r *http.Request) {
 		if item.Slug == slug {
 			// Cast item.BodyHTML to template.HTML here too
 			app.Render(w, "templates/post.html", map[string]any{
-				"Title":    item.Title,
-				"Date":     item.Date,
-				"BodyHTML": template.HTML(item.BodyHTML),
+				"Title":       item.Title,
+				"Description": item.Summary,
+				"Date":        item.Date,
+				"ReadingTime": item.ReadingTime,
+				"Page":        "library",
+				"BodyHTML":    template.HTML(item.BodyHTML),
 			})
 			return
 		}

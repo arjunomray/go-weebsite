@@ -12,7 +12,7 @@
   <div class="index-grid">
     {{ range .Posts }}
     <div class="index-item">
-      <small class="item-date">{{ .Date.Format "2006-01-02" }}</small>
+      <small class="item-date">{{ .Date.Format "2006-01-02" }}{{ if .ReadingTime }} &bull; {{ .ReadingTime }} min read{{ end }}</small>
       <h3><a href="/blog/{{ .Slug }}">{{ .Title }}</a></h3>
       <p>{{ .Summary }}</p>
       <div class="tags-row">
