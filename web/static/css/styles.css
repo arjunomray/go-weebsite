@@ -180,6 +180,43 @@
   z-index: 9999;
 }
 
+/* Anime Girl Theme Transition Mascot */
+.anime-theme-mascot {
+  position: fixed;
+  bottom: -20px;
+  right: 40px;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 3px solid var(--accent);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  background-image: url('/static/images/img.jpg');
+  background-size: cover;
+  background-position: center;
+  z-index: 100000;
+  pointer-events: none;
+  animation: animeMascotPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes animeMascotPop {
+  0% {
+    transform: translateY(160px) scale(0.6) rotate(-15deg);
+    opacity: 0;
+  }
+  30% {
+    transform: translateY(-20px) scale(1.1) rotate(5deg);
+    opacity: 1;
+  }
+  60% {
+    transform: translateY(0px) scale(1.0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(160px) scale(0.8) rotate(10deg);
+    opacity: 0;
+  }
+}
+
 html {
   height: 100%;
 }
