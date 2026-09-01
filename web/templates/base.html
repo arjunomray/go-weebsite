@@ -28,11 +28,14 @@
 <body hx-boost="true">
   <div class="site-wrapper">
     <header class="site-header">
-      <logo class="logo">arjun</logo>
-      <br>
-      {{ template "templates/components/lofi.html" . }}
+      <div class="header-top">
+        <div class="header-brand">
+          <logo class="logo">arjun</logo>
+          {{ template "templates/components/lofi.html" . }}
+        </div>
+        <img class="header-avatar" src="/static/images/img.jpg" alt="Arjun">
+      </div>
       {{ template "templates/components/nav.html" . }}
-
     </header>
     <section class="site-main-section">
       <main class="main-content-card">

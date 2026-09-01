@@ -54,35 +54,65 @@ body {
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
-  max-width: 960px;
+  max-width: 820px;
   margin: 0 auto;
-  padding: 28px 24px 20px 24px;
+  padding: 36px 24px 24px 24px;
 }
 
 /* Header Elements Grouping */
 .site-header {
-  text-align: center;
-  margin-bottom: 24px;
+  width: 100%;
+  margin-bottom: 36px;
   flex-shrink: 0;
+}
+
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.header-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .logo {
   font-family: "Bitcount Single", system-ui;
-  font-size: 48px;
+  font-size: 42px;
   font-weight: 500;
   color: var(--accent);
   letter-spacing: -1px;
-  margin-bottom: 12px;
+  line-height: 1;
+}
+
+.header-avatar {
+  height: 64px;
+  width: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-soft);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.header-avatar:hover {
+  transform: scale(1.05);
 }
 
 /* The Fixed Width Center Box Architecture */
 .navbar {
   display: flex;
-  justify-content: center;
-  gap: 32px;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
-  margin: 0 auto;
-  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--border-soft);
+  padding-bottom: 12px;
 }
 
 .nav-link {
@@ -122,18 +152,9 @@ body {
 .hero-view {
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  align-items: center;
-  /* flex: 1 0 auto; */
-  /* padding: 10px 0 20px 0; */
-  gap: 20px;
+  justify-content: flex-start;
+  align-items: flex-start;
   width: 100%;
-}
-
-.hero-view h2 {
-  font-size: 24px;
-  color: var(--text-head);
-  letter-spacing: -0.5px;
 }
 
 .hero-content {
@@ -142,11 +163,17 @@ body {
   justify-content: flex-start;
   align-items: flex-start;
   text-align: left;
-  gap: 24px;
+  gap: 28px;
   width: 100%;
-  max-width: 800px;
   font-size: 15px;
   line-height: 1.75;
+}
+
+.hero-content h2 {
+  font-size: 24px;
+  color: var(--text-head);
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
 }
 
 .terminal-section {
@@ -171,19 +198,9 @@ body {
 .terminal-text {
   color: var(--text-body);
   font-size: 15px;
-  line-height: 1.7;
+  line-height: 1.75;
   padding-left: 14px;
   border-left: 2px solid var(--border-soft);
-}
-
-.hero-image {
-  height: 120px;
-  width: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--border-soft);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-  flex-shrink: 0;
 }
 
 /* Footer Section formatting */
@@ -250,7 +267,6 @@ body {
   flex-direction: column;
   justify-content: start;
   width: 100%;
-  max-width: 880px;
   margin: 0 auto 30px auto;
   font-size: 16px;
   color: var(--text-head);
@@ -328,7 +344,6 @@ body {
 /* --- Full Document Reading View Layout --- */
 .reading-view {
   width: 100%;
-  max-width: 880px;
   margin: 0 auto;
   flex: 1 0 auto;
 }
