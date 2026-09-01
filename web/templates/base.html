@@ -21,6 +21,7 @@
   {{ if .Description }}<meta name="twitter:description" content="{{ .Description }}">{{ end }}
   <meta name="twitter:image" content="/static/images/img.jpg">
 
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
   <script src="https://unpkg.com/htmx.org@2.0.0"></script>
   <link rel="icon" type="image/jpeg" href="/static/images/img.jpg">
 </head>
@@ -33,7 +34,7 @@
           <logo class="logo"><span class="logo-cmd">ssh</span> <span class="logo-user">user</span><span class="logo-at">@</span><span class="logo-host">arjunomray.com</span></logo>
           {{ template "templates/components/lofi.html" . }}
         </div>
-        <img class="header-avatar" src="/static/images/img.jpg" alt="Arjun">
+        <img class="header-avatar" src="/static/images/img.jpg" alt="Arjun" onclick="dropConfetti(event)" title="Click for confetti! 🎉">
       </div>
       {{ template "templates/components/nav.html" . }}
     </header>
@@ -116,6 +117,39 @@
         const nextIndex = (currentIndex + 1) % THEMES.length;
         const nextTheme = THEMES[nextIndex];
         applyTheme(nextTheme, event);
+      }
+
+      function dropConfetti(e) {
+        if (typeof confetti !== 'function') return;
+
+        // Origin at top across the screen, falling downwards
+        const colors = ['#83a598', '#b8bb26', '#fabd2f', '#fb4934', '#d3869b', '#8ec07c', '#ebdbb2'];
+        
+        confetti({
+          particleCount: 50,
+          spread: 80,
+          origin: { y: -0.1, x: 0.5 },
+          gravity: 0.8,
+          ticks: 250,
+          colors: colors,
+          startVelocity: 25
+        });
+
+        // Add side bursts for full festive effect
+        confetti({
+          particleCount: 25,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0, y: 0.1 },
+          colors: colors
+        });
+        confetti({
+          particleCount: 25,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1, y: 0.1 },
+          colors: colors
+        });
       }
 
       // Initialize saved theme immediately on load / page swap (no animation on first load)
