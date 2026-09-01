@@ -1,9 +1,9 @@
 {{ define "templates/components/nav.html" }}
 <nav class="navbar">
-  <a class="nav-link" href="/">/me</a>
-  <a class="nav-link" href="/blogs">/blogs</a>
-  <!-- <a class="nav-link" href="/career">/career</a> -->
-  <a class="nav-link" href="/library">/library</a>
-  <!-- <a class="nav-link" href="/games">/games</a> -->
+  <a class="nav-link{{ if eq .Page "home" }} active{{ end }}" href="/">/me</a>
+  <a class="nav-link{{ if eq .Page "blogs" }} active{{ end }}" href="/blogs">/blogs</a>
+  <!-- <a class="nav-link{{ if eq .Page "career" }} active{{ end }}" href="/career">/career</a> -->
+  <a class="nav-link{{ if eq .Page "library" }} active{{ end }}" href="/library">/library</a>
+  <!-- <a class="nav-link{{ if eq .Page "games" }} active{{ end }}" href="/games">/games</a> -->
 </nav>
 {{ end }}

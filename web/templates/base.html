@@ -2,8 +2,25 @@
 <html>
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/static/css/styles.css" />
-  <title>{{ .Title }}</title>
+  <title>{{ if .Title }}{{ .Title }} | arjun{{ else }}arjun{{ end }}</title>
+  {{ if .Description }}<meta name="description" content="{{ .Description }}">{{ end }}
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="{{ if .Title }}{{ .Title }}{{ else }}arjun{{ end }}">
+  {{ if .Description }}<meta property="og:description" content="{{ .Description }}">{{ end }}
+  <meta property="og:image" content="/static/images/img.jpg">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:creator" content="@arjunrambles">
+  <meta name="twitter:title" content="{{ if .Title }}{{ .Title }}{{ else }}arjun{{ end }}">
+  {{ if .Description }}<meta name="twitter:description" content="{{ .Description }}">{{ end }}
+  <meta name="twitter:image" content="/static/images/img.jpg">
+
   <script src="https://unpkg.com/htmx.org@2.0.0"></script>
   <link rel="icon" type="image/jpeg" href="/static/images/img.jpg">
 </head>
@@ -14,7 +31,7 @@
       <logo class="logo">arjun</logo>
       <br>
       {{ template "templates/components/lofi.html" . }}
-      {{ template "templates/components/nav.html" }}
+      {{ template "templates/components/nav.html" . }}
 
     </header>
     <section>
