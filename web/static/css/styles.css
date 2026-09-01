@@ -52,44 +52,43 @@ body {
 .site-wrapper {
   display: flex;
   flex-direction: column;
-  flex: 1 0 auto;
   min-height: 100vh;
   width: 100%;
   max-width: 960px;
   margin: 0 auto;
-  padding: 40px 32px 32px 32px;
+  padding: 28px 24px 20px 24px;
 }
 
 /* Header Elements Grouping */
 .site-header {
   text-align: center;
-  margin-bottom: 48px;
+  margin-bottom: 24px;
   flex-shrink: 0;
 }
 
 .logo {
   font-family: "Bitcount Single", system-ui;
-  font-size: 56px;
+  font-size: 48px;
   font-weight: 500;
   color: var(--accent);
   letter-spacing: -1px;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 
 /* The Fixed Width Center Box Architecture */
 .navbar {
   display: flex;
   justify-content: center;
-  gap: 36px;
+  gap: 32px;
   width: 100%;
   margin: 0 auto;
-  padding-bottom: 12px;
+  padding-bottom: 8px;
 }
 
 .nav-link {
   color: var(--text-muted);
   text-decoration: none;
-  font-size: 16px;
+  font-size: 15px;
   transition: color 0.15s ease-in-out;
 }
 
@@ -126,13 +125,13 @@ body {
   justify-content: center;
   align-items: center;
   flex: 1 0 auto;
-  padding: 20px 0 40px 0;
-  gap: 32px;
+  padding: 10px 0 20px 0;
+  gap: 20px;
   width: 100%;
 }
 
 .hero-view h2 {
-  font-size: 28px;
+  font-size: 24px;
   color: var(--text-head);
   letter-spacing: -0.5px;
 }
@@ -143,26 +142,26 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  gap: 28px;
-  max-width: 760px;
-  font-size: 18px;
-  line-height: 1.9;
+  gap: 20px;
+  max-width: 720px;
+  font-size: 16px;
+  line-height: 1.75;
 }
 
 .hero-image {
-  height: 140px;
-  width: 140px;
+  height: 120px;
+  width: 120px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--border-soft);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
 }
 
 /* Footer Section formatting */
 .site-footer {
   width: 100%;
   margin-top: auto;
-  padding-top: 48px;
+  padding-top: 24px;
   font-size: 13px;
   color: var(--text-muted);
   flex-shrink: 0;

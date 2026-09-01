@@ -37,12 +37,8 @@ func LoggingMiddleware(next http.Handler) http.Handler {
 
 func (app *App) Custom404(next *http.ServeMux) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// if _, p := next.Handler(r); p == "" {
-		// 	fmt.Println("404", p)
-		// 	app.Render(w, "404.html")
-		// 	return
-		// }
-		if _, p := next.Handler(r); p == "GET /" && r.URL.Path != "/" {
+		_, pattern := next.Handler(r)
+		if pattern == "" || (pattern == "GET /" && r.URL.Path != "/") {
 			w.WriteHeader(http.StatusNotFound)
 			app.Render(w, "templates/404.html", PageData{Title: "404 Not Found"})
 			return
@@ -83,7 +79,10 @@ func (app *App) LibraryListHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *App) BlogPostHandler(w http.ResponseWriter, r *http.Request) {
-	slug := strings.TrimPrefix(r.URL.Path, "/blog/")
+	slug := r.PathValue("slug")
+	if slug == "" {
+		slug = strings.TrimPrefix(r.URL.Path, "/blog/")
+	}
 	for _, post := range BlogPosts {
 		if post.Slug == slug {
 			// Cast post.BodyHTML to template.HTML so Go knows it's safe execution data
@@ -102,7 +101,10 @@ func (app *App) BlogPostHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *App) LibraryPostHandler(w http.ResponseWriter, r *http.Request) {
-	slug := strings.TrimPrefix(r.URL.Path, "/library/")
+	slug := r.PathValue("slug")
+	if slug == "" {
+		slug = strings.TrimPrefix(r.URL.Path, "/library/")
+	}
 	for _, item := range LibraryItems {
 		if item.Slug == slug {
 			// Cast item.BodyHTML to template.HTML here too
