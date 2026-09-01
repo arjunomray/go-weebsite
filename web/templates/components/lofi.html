@@ -1,5 +1,5 @@
 {{ define "templates/components/lofi.html" }}
-<div class="lofi-widget">
+<div class="lofi-widget" id="lofi-widget" hx-preserve="true">
   <button id="lofi-toggle" class="lofi-btn" onclick="toggleLofi()">
     [<span id="lofi-status">OFF</span>] lofi_player
   </button>
@@ -12,70 +12,78 @@
 </div>
 
 <script>
-  const playlist = [
-    "/static/audio/track1.mp3",
-    "/static/audio/track2.mp3",
-    "/static/audio/track3.mp3",
-    "/static/audio/track4.mp3",
-    "/static/audio/track5.mp3",
-    "/static/audio/track6.mp3",
-    "/static/audio/track7.mp3",
-    "/static/audio/track8.mp3",
-    "/static/audio/track9.mp3",
-    "/static/audio/track10.mp3",
-  ];
+  if (!window._lofiInitialized) {
+    window._lofiInitialized = true;
+    window._lofiPlaylist = [
+      "/static/audio/track1.mp3",
+      "/static/audio/track2.mp3",
+      "/static/audio/track3.mp3",
+      "/static/audio/track4.mp3",
+      "/static/audio/track5.mp3",
+      "/static/audio/track6.mp3",
+      "/static/audio/track7.mp3",
+      "/static/audio/track8.mp3",
+      "/static/audio/track9.mp3",
+      "/static/audio/track10.mp3",
+    ];
+    window._lofiLastTrack = null;
 
-  let lastTrack = null;
+    window.getRandomTrack = function() {
+      const choices = window._lofiPlaylist.filter(track => track !== window._lofiLastTrack);
+      const randomChoice = choices[Math.floor(Math.random() * choices.length)];
+      window._lofiLastTrack = randomChoice;
+      return randomChoice;
+    };
 
-  function getRandomTrack() {
-    const choices = playlist.filter(track => track !== lastTrack);
-    const randomChoice = choices[Math.floor(Math.random() * choices.length)];
-    lastTrack = randomChoice;
-    return randomChoice;
-  }
+    window.toggleLofi = function() {
+      const player = document.getElementById('lofi-player');
+      const status = document.getElementById('lofi-status');
+      if (!player) return;
 
-  function toggleLofi() {
-    const player = document.getElementById('lofi-player');
-    const status = document.getElementById('lofi-status');
+      if (!player.src) {
+        player.src = window.getRandomTrack();
+      }
 
-    if (!player.src) {
-      player.src = getRandomTrack();
-    }
+      if (player.paused) {
+        player.play().then(() => {
+          if (status) {
+            status.innerText = "PLAYING";
+            status.style.color = "#b8bb26"; // Gruvbox Green
+          }
+        }).catch(err => {
+          console.error("Audio playback failed:", err);
+        });
+      } else {
+        player.pause();
+        if (status) {
+          status.innerText = "OFF";
+          status.style.color = "";
+        }
+      }
+    };
 
-    if (player.paused) {
+    window.skipTrack = function() {
+      const player = document.getElementById('lofi-player');
+      const status = document.getElementById('lofi-status');
+      if (!player) return;
+
+      player.src = window.getRandomTrack();
       player.play().then(() => {
-        status.innerText = "PLAYING";
-        status.style.color = "#b8bb26"; // Gruvbox Green
+        if (status) {
+          status.innerText = "PLAYING";
+          status.style.color = "#b8bb26";
+        }
       }).catch(err => {
-        console.error("Audio playback failed:", err);
+        console.error("Skip action playback failed:", err);
       });
-    } else {
-      player.pause();
-      status.innerText = "OFF";
-      status.style.color = "";
-    }
-  }
+    };
 
-  // The New Skip Logic Execution Function
-  function skipTrack() {
-    const player = document.getElementById('lofi-player');
-    const status = document.getElementById('lofi-status');
-
-    // Load a brand new random file track destination string
-    player.src = getRandomTrack();
-
-    // Force play the clean track connection immediately
-    player.play().then(() => {
-      status.innerText = "PLAYING";
-      status.style.color = "#b8bb26";
-    }).catch(err => {
-      console.error("Skip action playback failed:", err);
+    document.addEventListener('DOMContentLoaded', function() {
+      const player = document.getElementById('lofi-player');
+      if (player) {
+        player.addEventListener('ended', window.skipTrack);
+      }
     });
   }
-
-  // Maintain automatic queue transition fallback loop 
-  document.getElementById('lofi-player').addEventListener('ended', function () {
-    skipTrack();
-  });
 </script>
 {{ end }}
