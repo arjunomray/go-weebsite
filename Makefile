@@ -9,5 +9,5 @@ export:
 	go run cmd/*.go export
 
 deploy: export
-	wrangler pages deploy dist --project-name go-weebsite
+	wrangler pages deploy dist --project-name go-weebsite --branch main --commit-dirty=true
 

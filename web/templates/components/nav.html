@@ -1,9 +1,9 @@
 {{ define "templates/components/nav.html" }}
 <nav class="navbar">
-  <a class="nav-link" href="/">/me</a>
-  <a class="nav-link" href="/blogs">/blogs</a>
-  <!-- <a class="nav-link" href="/career">/career</a> -->
-  <a class="nav-link" href="/library">/library</a>
-  <!-- <a class="nav-link" href="/games">/games</a> -->
+  <a class="nav-link{{ if eq .Page "home" }} active{{ end }}" href="/" data-key="m"><span class="nav-text">/me</span> <span class="nav-key">[m]</span></a>
+  <a class="nav-link{{ if eq .Page "work" }} active{{ end }}" href="/work" data-key="w"><span class="nav-text">/work</span> <span class="nav-key">[w]</span></a>
+  <a class="nav-link{{ if eq .Page "blogs" }} active{{ end }}" href="/blogs" data-key="b"><span class="nav-text">/blogs</span> <span class="nav-key">[b]</span></a>
+  <a class="nav-link{{ if eq .Page "library" }} active{{ end }}" href="/library" data-key="l"><span class="nav-text">/library</span> <span class="nav-key">[l]</span></a>
+  <a class="nav-link nav-action-btn" href="javascript:void(0)" onclick="cycleTheme(event)" data-key="c"><span class="nav-text">/colorscheme</span> <span class="nav-key">[c]</span></a>
 </nav>
 {{ end }}

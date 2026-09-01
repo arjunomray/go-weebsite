@@ -1,27 +1,38 @@
 {{ define "content" }}
-<div class="content-list-wrapper">
-  <h2>log_entries</h2>
+<div class="hero-view">
+  <div class="hero-content">
+    <div class="terminal-section">
+      <div class="terminal-prompt"><span class="prompt-symbol">$</span>ls ./blogs --sort=-date</div>
 
-  {{ if .CurrentTag }}
-  <div style="margin-bottom: 20px; color: var(--accent);">
-    Active flag index: #{{ .CurrentTag }} <a href="/blogs"
-      style="color: var(--text-error); text-decoration: none;">[Clear]</a>
-  </div>
-  {{ end }}
+      {{ if .CurrentTag }}
+      <div class="terminal-tag-filter">
+        Active tag filter: #{{ .CurrentTag }} <a href="/blogs" class="clear-tag-btn">[Clear]</a>
+      </div>
+      {{ end }}
 
-  <div class="index-grid">
-    {{ range .Posts }}
-    <div class="index-item">
-      <small class="item-date">{{ .Date.Format "2006-01-02" }}</small>
-      <h3><a href="/blog/{{ .Slug }}">{{ .Title }}</a></h3>
-      <p>{{ .Summary }}</p>
-      <div class="tags-row">
-        {{ range .Tags }}
-        <a href="/blogs?tag={{ . }}" class="tag-flag">#{{ . }}</a>
+      <div class="terminal-divider"></div>
+
+      <div class="blog-terminal-list">
+        {{ range .Posts }}
+        <div class="blog-terminal-row">
+          <div class="blog-row-main">
+            <span class="blog-row-date">{{ .Date.Format "2006-01-02" }}</span>
+            <a href="/blog/{{ .Slug }}" class="blog-row-title">{{ .Title }}</a>
+          </div>
+          {{ if .Tags }}
+          <div class="blog-row-tags">
+            {{ range .Tags }}
+            <a href="/blogs?tag={{ . }}" class="blog-tag-link">#{{ . }}</a>
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
         {{ end }}
       </div>
+
+      <div class="terminal-divider"></div>
     </div>
-    {{ end }}
   </div>
 </div>
 {{ end }}
+{{ template "templates/base.html" . }}

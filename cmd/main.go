@@ -65,12 +65,11 @@ func main() {
 	handler.Handle("GET /static/{s...}", http.StripPrefix("/static", http.FileServer(http.FS(staticFS))))
 	handler.HandleFunc("GET /health", app.HealthHandler)
 	handler.HandleFunc("GET /", app.HomeHandler)
+	handler.HandleFunc("GET /work", app.WorkHandler)
 	handler.HandleFunc("GET /blogs", app.BlogListHandler)
-	handler.HandleFunc("GET /blog/", app.BlogPostHandler) // Matches /blog/<slug>
-
-	// Register Library Paths
+	handler.HandleFunc("GET /blog/{slug}", app.BlogPostHandler)
 	handler.HandleFunc("GET /library", app.LibraryListHandler)
-	handler.HandleFunc("GET /library/", app.LibraryPostHandler)
+	handler.HandleFunc("GET /library/{slug}", app.LibraryPostHandler)
 
 	s := &http.Server{
 		Addr:           ":8000",

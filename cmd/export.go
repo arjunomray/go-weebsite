@@ -58,15 +58,30 @@ func (app *App) ExportStatic(outDir string) error {
 	}
 
 	// 3. Render Home page
-	if err := writePage("index.html", "templates/home.html", PageData{Title: "Home"}); err != nil {
+	if err := writePage("index.html", "templates/home.html", PageData{
+		Title:       "Home",
+		Description: "Software developer from India. I build things, read books, and meditate.",
+		Page:        "home",
+	}); err != nil {
+		return err
+	}
+
+	// 3b. Render Work page
+	if err := writePage("work/index.html", "templates/work.html", PageData{
+		Title:       "Work",
+		Description: "Career log and professional engineering experience.",
+		Page:        "work",
+	}); err != nil {
 		return err
 	}
 
 	// 4. Render Blogs list
 	if err := writePage("blogs/index.html", "templates/blogs.html", map[string]any{
-		"Title":      "blogs",
-		"Posts":      BlogPosts,
-		"CurrentTag": "",
+		"Title":       "blogs",
+		"Description": "Thoughts, notes and writing from Arjun.",
+		"Page":        "blogs",
+		"Posts":       BlogPosts,
+		"CurrentTag":  "",
 	}); err != nil {
 		return err
 	}
@@ -75,9 +90,14 @@ func (app *App) ExportStatic(outDir string) error {
 	for _, post := range BlogPosts {
 		postDest := filepath.Join("blog", post.Slug, "index.html")
 		if err := writePage(postDest, "templates/post.html", map[string]any{
-			"Title":    post.Title,
-			"Date":     post.Date,
-			"BodyHTML": template.HTML(post.BodyHTML),
+			"Title":       post.Title,
+			"Slug":        post.Slug,
+			"Tags":        post.Tags,
+			"Description": post.Summary,
+			"Date":        post.Date,
+			"ReadingTime": post.ReadingTime,
+			"Page":        "blogs",
+			"BodyHTML":    template.HTML(post.BodyHTML),
 		}); err != nil {
 			return err
 		}
@@ -85,9 +105,11 @@ func (app *App) ExportStatic(outDir string) error {
 
 	// 6. Render Library list
 	if err := writePage("library/index.html", "templates/library.html", map[string]any{
-		"Title":      "library",
-		"Media":      LibraryItems,
-		"CurrentTag": "",
+		"Title":       "library",
+		"Description": "Books and media that shaped my thinking.",
+		"Page":        "library",
+		"Media":       LibraryItems,
+		"CurrentTag":  "",
 	}); err != nil {
 		return err
 	}
@@ -96,17 +118,41 @@ func (app *App) ExportStatic(outDir string) error {
 	for _, item := range LibraryItems {
 		itemDest := filepath.Join("library", item.Slug, "index.html")
 		if err := writePage(itemDest, "templates/post.html", map[string]any{
-			"Title":    item.Title,
-			"Date":     item.Date,
-			"BodyHTML": template.HTML(item.BodyHTML),
+			"Title":       item.Title,
+			"Slug":        item.Slug,
+			"Tags":        item.Tags,
+			"Description": item.Summary,
+			"Date":        item.Date,
+			"ReadingTime": item.ReadingTime,
+			"Page":        "library",
+			"BodyHTML":    template.HTML(item.BodyHTML),
 		}); err != nil {
 			return err
 		}
 	}
 
 	// 8. Render 404 page
-	if err := writePage("404.html", "templates/404.html", PageData{Title: "404 Not Found"}); err != nil {
+	if err := writePage("404.html", "templates/404.html", PageData{
+		Title:       "404 Not Found",
+		Description: "Page not found",
+		Page:        "",
+	}); err != nil {
 		return err
+	}
+
+	// 9. Write Cloudflare Pages _redirects for clean URLs (no trailing slash needed)
+	redirects := "/work /work/index.html 200\n"
+	redirects += "/blogs /blogs/index.html 200\n"
+	redirects += "/library /library/index.html 200\n"
+	for _, post := range BlogPosts {
+		redirects += fmt.Sprintf("/blog/%s /blog/%s/index.html 200\n", post.Slug, post.Slug)
+	}
+	for _, item := range LibraryItems {
+		redirects += fmt.Sprintf("/library/%s /library/%s/index.html 200\n", item.Slug, item.Slug)
+	}
+	redirects += "/* /404.html 404\n"
+	if err := os.WriteFile(filepath.Join(outDir, "_redirects"), []byte(redirects), 0644); err != nil {
+		return fmt.Errorf("write _redirects: %w", err)
 	}
 
 	fmt.Printf("[Success] Static website exported to '%s'\n", outDir)

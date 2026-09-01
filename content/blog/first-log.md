@@ -3,7 +3,7 @@ title: This is a test
 date: 2026-06-07
 tags: dev, minimal, go
 summary: .
-stage: published
+stage: draft
 ---
 # Simplicity Over Everything
 

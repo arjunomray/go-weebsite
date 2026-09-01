@@ -70,6 +70,8 @@ func InitContentDatabase(dirPath string) ([]ContentItem, error) {
 				item.Summary = val
 			case "stage":
 				item.Stage = strings.TrimSpace(strings.ToLower(val))
+			case "status":
+				item.Status = strings.TrimSpace(val)
 			case "date":
 				item.Date, _ = time.Parse("2006-01-02", val)
 			case "tags":
@@ -79,10 +81,22 @@ func InitContentDatabase(dirPath string) ([]ContentItem, error) {
 			}
 		}
 
+		// Only publish items explicitly marked as published
+		if item.Stage != "published" {
+			continue
+		}
+
 		// Transpile raw Markdown bytes directly to HTML string structures
 		var buf bytes.Buffer
 		if err := goldmark.Convert([]byte(markdownBody), &buf); err == nil {
 			item.BodyHTML = buf.String()
+		}
+
+		// Compute reading time: ~200 words per minute
+		wordCount := len(strings.Fields(markdownBody))
+		item.ReadingTime = wordCount / 200
+		if item.ReadingTime < 1 {
+			item.ReadingTime = 1
 		}
 
 		items = append(items, item)
