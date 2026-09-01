@@ -1,27 +1,36 @@
 {{ define "content" }}
-<div class="content-list-wrapper">
-  <h2>media_vault</h2>
+<div class="hero-view">
+  <div class="hero-content">
+    <div class="terminal-section">
+      <div class="terminal-prompt"><span class="prompt-symbol">$</span>ls ./library --sort=-date</div>
 
-  {{ if .CurrentTag }}
-  <div style="margin-bottom: 20px; font-size: 13px; color: #fabd2f;">
-    Active media filter: #{{ .CurrentTag }} <a href="/library"
-      style="color: #fb4934; text-decoration: none; margin-left: 5px;">[Clear]</a>
-  </div>
-  {{ end }}
+      {{ if .CurrentTag }}
+      <div class="terminal-tag-filter">
+        Active filter: #{{ .CurrentTag }} <a href="/library" class="clear-tag-btn">[Clear]</a>
+      </div>
+      {{ end }}
 
-  <div class="index-grid">
-    {{ range .Media }}
-    <div class="index-item">
-      <small class="item-date">{{ .Date.Format "2006-01-02" }}</small>
-      <h3><a href="/library/{{ .Slug }}">{{ .Title }}</a></h3>
-      <p>{{ .Summary }}</p>
-      <div class="tags-row">
-        {{ range .Tags }}
-        <a href="/library?tag={{ . }}" class="tag-flag">#{{ . }}</a>
+      <div class="terminal-divider"></div>
+
+      <div class="library-terminal-list">
+        {{ range .Media }}
+        <div class="library-terminal-row">
+          <span class="library-status">{{ if eq .Stage "published" }}finished{{ else }}{{ .Stage }}{{ end }}</span>
+          <a href="/library/{{ .Slug }}" class="library-item-title">{{ .Title }}</a>
+          {{ if .Tags }}
+          <div class="library-item-tags">
+            {{ range .Tags }}
+            <a href="/library?tag={{ . }}" class="blog-tag-link">#{{ . }}</a>
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
         {{ end }}
       </div>
+
+      <div class="terminal-divider"></div>
     </div>
-    {{ end }}
   </div>
 </div>
 {{ end }}
+{{ template "templates/base.html" . }}

@@ -91,6 +91,8 @@ func (app *App) ExportStatic(outDir string) error {
 		postDest := filepath.Join("blog", post.Slug, "index.html")
 		if err := writePage(postDest, "templates/post.html", map[string]any{
 			"Title":       post.Title,
+			"Slug":        post.Slug,
+			"Tags":        post.Tags,
 			"Description": post.Summary,
 			"Date":        post.Date,
 			"ReadingTime": post.ReadingTime,
@@ -117,6 +119,8 @@ func (app *App) ExportStatic(outDir string) error {
 		itemDest := filepath.Join("library", item.Slug, "index.html")
 		if err := writePage(itemDest, "templates/post.html", map[string]any{
 			"Title":       item.Title,
+			"Slug":        item.Slug,
+			"Tags":        item.Tags,
 			"Description": item.Summary,
 			"Date":        item.Date,
 			"ReadingTime": item.ReadingTime,

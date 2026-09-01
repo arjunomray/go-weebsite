@@ -97,6 +97,8 @@ func (app *App) BlogPostHandler(w http.ResponseWriter, r *http.Request) {
 			// Cast post.BodyHTML to template.HTML so Go knows it's safe execution data
 			app.Render(w, "templates/post.html", map[string]any{
 				"Title":       post.Title,
+				"Slug":        post.Slug,
+				"Tags":        post.Tags,
 				"Description": post.Summary,
 				"Date":        post.Date,
 				"ReadingTime": post.ReadingTime,
@@ -119,6 +121,8 @@ func (app *App) LibraryPostHandler(w http.ResponseWriter, r *http.Request) {
 			// Cast item.BodyHTML to template.HTML here too
 			app.Render(w, "templates/post.html", map[string]any{
 				"Title":       item.Title,
+				"Slug":        item.Slug,
+				"Tags":        item.Tags,
 				"Description": item.Summary,
 				"Date":        item.Date,
 				"ReadingTime": item.ReadingTime,

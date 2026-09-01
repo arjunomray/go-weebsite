@@ -1,15 +1,44 @@
 {{ define "content" }}
-<article class="reading-view">
-  <header>
-    <a href="javascript:history.back()" class="console-link">[<- Back]</a>
-        <h1 style="margin: 15px 0 5px 0;">{{ .Title }}</h1>
-        <small style="color: var(--text-muted);">Compiled: {{ .Date.Format "2006-01-02" }}{{ if .ReadingTime }} &bull; {{ .ReadingTime }} min read{{ end }}</small>
-  </header>
+<div class="hero-view">
+  <div class="hero-content">
+    <div class="terminal-section">
+      <div class="terminal-prompt"><span class="prompt-symbol">$</span>cat {{ if eq .Page "library" }}library{{ else }}blogs{{ end }}/{{ .Title }}.md</div>
 
-  <hr style="border: 0; border-top: 1px dashed var(--border-soft); margin: 20px 0;">
+      <div class="terminal-divider"></div>
 
-  <div class="markdown-body">
-    {{ .BodyHTML }}
+      <article class="post-terminal-view">
+        <header class="post-header-block">
+          <h1 class="post-main-title">{{ .Title }}</h1>
+          <div class="post-meta-row">
+            <span class="post-meta-date">{{ .Date.Format "2006-01-02" }}</span>
+            {{ if .Tags }}
+            <span class="post-meta-dot">&middot;</span>
+            <div class="post-tags-inline">
+              {{ range .Tags }}
+              <span class="post-meta-tag">#{{ . }}</span>
+              {{ end }}
+            </div>
+            {{ end }}
+          </div>
+          <div class="post-back-nav">
+            <a href="{{ if eq .Page "library" }}/library{{ else }}/blogs{{ end }}" class="post-back-link">[&larr; back to /{{ if eq .Page "library" }}library{{ else }}blogs{{ end }}]</a>
+          </div>
+        </header>
+
+        <div class="terminal-divider"></div>
+
+        <div class="markdown-body">
+          {{ .BodyHTML }}
+        </div>
+
+        <div class="terminal-divider"></div>
+
+        <div class="post-footer-nav">
+          <a href="{{ if eq .Page "library" }}/library{{ else }}/blogs{{ end }}" class="post-back-link">[&larr; back to /{{ if eq .Page "library" }}library{{ else }}blogs{{ end }}]</a>
+        </div>
+      </article>
+    </div>
   </div>
-</article>
+</div>
 {{ end }}
+{{ template "templates/base.html" . }}
