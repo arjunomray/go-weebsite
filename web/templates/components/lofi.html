@@ -1,12 +1,20 @@
 {{ define "templates/components/lofi.html" }}
 <div class="lofi-widget" id="lofi-widget" hx-preserve="true">
-  <button id="lofi-toggle" class="lofi-btn" onclick="toggleLofi()">
-    [<span id="lofi-status">OFF</span>] lofi_player
-  </button>
+  <div class="lofi-controls">
+    <button id="lofi-toggle" class="lofi-btn" onclick="toggleLofi()">
+      [<span id="lofi-status">OFF</span>] lofi_player
+    </button>
 
-  <button id="lofi-next" class="lofi-btn skip-btn" onclick="skipTrack()" title="Skip Track">
-    [>>]
-  </button>
+    <button id="lofi-next" class="lofi-btn skip-btn" onclick="skipTrack()" title="Skip Track">
+      [>>]
+    </button>
+  </div>
+
+  <div class="theme-indicator">
+    <button class="theme-btn" onclick="cycleTheme()" title="Cycle colorscheme [c]">
+      theme: <span id="theme-display" class="theme-name-display">gruvbox</span>
+    </button>
+  </div>
 
   <audio id="lofi-player" preload="none"></audio>
 </div>

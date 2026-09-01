@@ -1,29 +1,79 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
-:root {
-  /* Gruvbox Dark Hard Colors */
+:root,
+[data-theme="gruvbox"] {
+  /* Gruvbox Dark Hard */
   --bg-main: #1d2021;
-  /* Deep charcoal background */
   --bg-surface: #282828;
-  /* Content card canvas background */
   --border-soft: #3c3836;
-  /* Hard contrast dividing line layer */
-
   --text-head: #fbf1c7;
-  /* Bright cream */
   --text-body: #ebdbb2;
-  /* Neutral soft cream text */
   --text-muted: #928374;
-  /* Slate grey metadata */
-
   --accent: #83a598;
-  /* Logo & active highlight light blue */
   --accent-hover: #8ec07c;
-  /* Soft aqua for links */
   --text-success: #b8bb26;
-  /* Gruvbox green */
   --tag-bg: #32302f;
-  /* Tag background */
+  --theme-name: "gruvbox";
+}
+
+[data-theme="nord"] {
+  /* Nord Theme */
+  --bg-main: #2e3440;
+  --bg-surface: #3b4252;
+  --border-soft: #4c566a;
+  --text-head: #eceff4;
+  --text-body: #e5e9f0;
+  --text-muted: #88c0d0;
+  --accent: #81a1c1;
+  --accent-hover: #88c0d0;
+  --text-success: #a3be8c;
+  --tag-bg: #434c5e;
+  --theme-name: "nord";
+}
+
+[data-theme="rose-pine"] {
+  /* Rosé Pine */
+  --bg-main: #191724;
+  --bg-surface: #1f1d2e;
+  --border-soft: #26233a;
+  --text-head: #e0def4;
+  --text-body: #908caa;
+  --text-muted: #6e6a86;
+  --accent: #c4a7e7;
+  --accent-hover: #ebbcba;
+  --text-success: #31748f;
+  --tag-bg: #2a283e;
+  --theme-name: "rose-pine";
+}
+
+[data-theme="catppuccin"] {
+  /* Catppuccin Mocha */
+  --bg-main: #1e1e2e;
+  --bg-surface: #181825;
+  --border-soft: #313244;
+  --text-head: #cdd6f4;
+  --text-body: #bac2de;
+  --text-muted: #a6adc8;
+  --accent: #89b4fa;
+  --accent-hover: #cba6f7;
+  --text-success: #a6e3a1;
+  --tag-bg: #45475a;
+  --theme-name: "catppuccin";
+}
+
+[data-theme="everforest"] {
+  /* Everforest Dark */
+  --bg-main: #272e33;
+  --bg-surface: #2d353b;
+  --border-soft: #414b50;
+  --text-head: #d3c6aa;
+  --text-body: #d3c6aa;
+  --text-muted: #7a8478;
+  --accent: #7fbbb3;
+  --accent-hover: #83c092;
+  --text-success: #a7c080;
+  --tag-bg: #343f44;
+  --theme-name: "everforest";
 }
 
 /* Master Reset */
@@ -376,15 +426,45 @@ body {
 }
 
 
-.lofi-btn {
+.lofi-widget {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.lofi-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.theme-indicator {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.theme-btn {
   background: transparent;
   border: none;
   color: var(--text-muted);
   font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
+  font-size: 12px;
   cursor: pointer;
   padding: 0;
-  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.theme-btn:hover {
+  color: var(--accent);
+}
+
+.theme-name-display {
+  color: var(--accent);
+  font-weight: 600;
 }
 
 .lofi-btn:hover {

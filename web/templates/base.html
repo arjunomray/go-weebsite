@@ -39,7 +39,37 @@
     </header>
 
     <script>
-      // Global navigation keybindings: [m] -> /me, [w] -> /work, [b] -> /blogs, [l] -> /library
+      // Color Schemes definition and state
+      const THEMES = ['gruvbox', 'nord', 'rose-pine', 'catppuccin', 'everforest'];
+      
+      function applyTheme(theme) {
+        if (!THEMES.includes(theme)) theme = 'gruvbox';
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('user-theme', theme);
+        const display = document.getElementById('theme-display');
+        if (display) display.innerText = theme;
+      }
+
+      function cycleTheme() {
+        const current = document.documentElement.getAttribute('data-theme') || 'gruvbox';
+        const currentIndex = THEMES.indexOf(current);
+        const nextIndex = (currentIndex + 1) % THEMES.length;
+        const nextTheme = THEMES[nextIndex];
+        applyTheme(nextTheme);
+      }
+
+      // Initialize saved theme immediately on load / page swap
+      const savedTheme = localStorage.getItem('user-theme') || 'gruvbox';
+      applyTheme(savedTheme);
+
+      // Re-sync display on htmx boost swaps
+      document.addEventListener('htmx:afterSettle', function() {
+        const current = document.documentElement.getAttribute('data-theme') || 'gruvbox';
+        const display = document.getElementById('theme-display');
+        if (display) display.innerText = current;
+      });
+
+      // Global navigation keybindings: [m] -> /me, [w] -> /work, [b] -> /blogs, [l] -> /library, [c] -> cycle theme
       document.addEventListener('keydown', function(e) {
         if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName) || e.metaKey || e.ctrlKey || e.altKey) {
           return;
@@ -57,6 +87,8 @@
         } else if (key === 'l') {
           const link = document.querySelector('a[data-key="l"]');
           if (link) link.click();
+        } else if (key === 'c') {
+          cycleTheme();
         }
       });
     </script>
