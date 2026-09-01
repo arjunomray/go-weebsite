@@ -4,6 +4,6 @@
   <a class="nav-link{{ if eq .Page "work" }} active{{ end }}" href="/work" data-key="w"><span class="nav-text">/work</span> <span class="nav-key">[w]</span></a>
   <a class="nav-link{{ if eq .Page "blogs" }} active{{ end }}" href="/blogs" data-key="b"><span class="nav-text">/blogs</span> <span class="nav-key">[b]</span></a>
   <a class="nav-link{{ if eq .Page "library" }} active{{ end }}" href="/library" data-key="l"><span class="nav-text">/library</span> <span class="nav-key">[l]</span></a>
-  <a class="nav-link nav-action-btn" href="javascript:void(0)" onclick="cycleTheme()" data-key="c"><span class="nav-text">/colorscheme</span> <span class="nav-key">[c]</span></a>
+  <a class="nav-link nav-action-btn" href="javascript:void(0)" onclick="cycleTheme(event)" data-key="c"><span class="nav-text">/colorscheme</span> <span class="nav-key">[c]</span></a>
 </nav>
 {{ end }}

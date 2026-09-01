@@ -53,25 +53,77 @@
         'everforest-light'
       ];
       
-      function applyTheme(theme) {
+      function applyTheme(theme, originEvent) {
         if (!THEMES.includes(theme)) theme = 'gruvbox';
-        document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem('user-theme', theme);
-        const display = document.getElementById('theme-display');
-        if (display) display.innerText = theme;
+        
+        const updateDOM = () => {
+          document.documentElement.setAttribute('data-theme', theme);
+          localStorage.setItem('user-theme', theme);
+          const display = document.getElementById('theme-display');
+          if (display) display.innerText = theme;
+        };
+
+        // If browser doesn't support View Transitions or user prefers reduced motion, apply instantly
+        if (!document.startViewTransition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          updateDOM();
+          return;
+        }
+
+        // Calculate origin point of the click or default to top-left / screen center
+        let x = window.innerWidth / 2;
+        let y = window.innerHeight / 2;
+
+        if (originEvent && originEvent.clientX !== undefined) {
+          x = originEvent.clientX;
+          y = originEvent.clientY;
+        } else {
+          const themeDisplay = document.getElementById('theme-display') || document.querySelector('a[data-key="c"]');
+          if (themeDisplay) {
+            const rect = themeDisplay.getBoundingClientRect();
+            x = rect.left + rect.width / 2;
+            y = rect.top + rect.height / 2;
+          }
+        }
+
+        // Calculate distance to the furthest corner to expand the circle
+        const endRadius = Math.hypot(
+          Math.max(x, window.innerWidth - x),
+          Math.max(y, window.innerHeight - y)
+        );
+
+        const transition = document.startViewTransition(updateDOM);
+
+        transition.ready.then(() => {
+          document.documentElement.animate(
+            {
+              clipPath: [
+                `circle(0px at ${x}px ${y}px)`,
+                `circle(${endRadius}px at ${x}px ${y}px)`
+              ]
+            },
+            {
+              duration: 450,
+              easing: 'cubic-bezier(0.25, 1, 0.5, 1)',
+              pseudoElement: '::view-transition-new(root)'
+            }
+          );
+        });
       }
 
-      function cycleTheme() {
+      function cycleTheme(event) {
         const current = document.documentElement.getAttribute('data-theme') || 'gruvbox';
         const currentIndex = THEMES.indexOf(current);
         const nextIndex = (currentIndex + 1) % THEMES.length;
         const nextTheme = THEMES[nextIndex];
-        applyTheme(nextTheme);
+        applyTheme(nextTheme, event);
       }
 
-      // Initialize saved theme immediately on load / page swap
+      // Initialize saved theme immediately on load / page swap (no animation on first load)
       const savedTheme = localStorage.getItem('user-theme') || 'gruvbox';
-      applyTheme(savedTheme);
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      localStorage.setItem('user-theme', savedTheme);
+      const initialDisplay = document.getElementById('theme-display');
+      if (initialDisplay) initialDisplay.innerText = savedTheme;
 
       // Re-sync display on htmx boost swaps
       document.addEventListener('htmx:afterSettle', function() {
