@@ -20,6 +20,10 @@
   /* Logo & active highlight light blue */
   --accent-hover: #8ec07c;
   /* Soft aqua for links */
+  --text-success: #b8bb26;
+  /* Gruvbox green */
+  --tag-bg: #32302f;
+  /* Tag background */
 }
 
 /* Master Reset */
