@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bitcount+Single:wght@100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
 :root {
   /* Gruvbox Dark Hard Colors */
@@ -69,47 +69,51 @@ body {
 .header-top {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
 }
 
 .header-brand {
   display: flex;
-  align-items: baseline;
-  gap: 20px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 6px;
 }
 
 .logo {
-  font-family: "Bitcount Single", system-ui;
-  font-size: 42px;
-  font-weight: 500;
+  font-family: "Fira Code", monospace;
+  font-size: 34px;
+  font-weight: 700;
   color: var(--accent);
-  letter-spacing: -1px;
-  line-height: 1;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+  text-decoration: none;
 }
 
 .header-avatar {
-  height: 64px;
-  width: 64px;
-  border-radius: 50%;
+  width: 72px;
+  height: 72px;
+  border-radius: 6px;
   object-fit: cover;
   border: 2px solid var(--border-soft);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
   flex-shrink: 0;
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, border-color 0.2s ease;
 }
 
 .header-avatar:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
+  border-color: var(--accent);
 }
 
 /* The Fixed Width Center Box Architecture */
 .navbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  gap: 36px;
   width: 100%;
   border-bottom: 1px dashed var(--border-soft);
   padding-bottom: 12px;
@@ -120,6 +124,9 @@ body {
   text-decoration: none;
   font-size: 15px;
   transition: color 0.15s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .nav-link:hover {
@@ -131,6 +138,14 @@ body {
   font-weight: 700;
   text-decoration: underline;
   text-underline-offset: 4px;
+}
+
+.nav-key {
+  color: #665c54;
+  font-size: 12px;
+  font-weight: 400;
+  font-family: 'JetBrains Mono', monospace;
+  text-decoration: none;
 }
 
 /* Main Section Filling Space */

@@ -30,13 +30,33 @@
     <header class="site-header">
       <div class="header-top">
         <div class="header-brand">
-          <logo class="logo">arjun</logo>
+          <logo class="logo">arjunomray</logo>
           {{ template "templates/components/lofi.html" . }}
         </div>
         <img class="header-avatar" src="/static/images/img.jpg" alt="Arjun">
       </div>
       {{ template "templates/components/nav.html" . }}
     </header>
+
+    <script>
+      // Global navigation keybindings: [m] -> /me, [b] -> /blogs, [l] -> /library
+      document.addEventListener('keydown', function(e) {
+        if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName) || e.metaKey || e.ctrlKey || e.altKey) {
+          return;
+        }
+        const key = e.key.toLowerCase();
+        if (key === 'm') {
+          const link = document.querySelector('a[data-key="m"]');
+          if (link) link.click();
+        } else if (key === 'b') {
+          const link = document.querySelector('a[data-key="b"]');
+          if (link) link.click();
+        } else if (key === 'l') {
+          const link = document.querySelector('a[data-key="l"]');
+          if (link) link.click();
+        }
+      });
+    </script>
     <section class="site-main-section">
       <main class="main-content-card">
         {{ block "content" . }}
