@@ -703,6 +703,30 @@ body {
   margin-bottom: 6px;
 }
 
+.markdown-body a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+.markdown-body a:hover {
+  color: var(--accent-hover);
+}
+
+.markdown-body a:visited {
+  color: var(--accent);
+}
+
+.markdown-body strong {
+  color: var(--text-head);
+  font-weight: 700;
+}
+
+.markdown-body em {
+  color: var(--text-head);
+}
+
 .markdown-body pre {
   background-color: var(--bg-surface);
   border: 1px solid var(--border-soft);
@@ -715,4 +739,16 @@ body {
 .markdown-body code {
   font-family: 'JetBrains Mono', monospace;
   font-size: 14px;
+  color: var(--text-success);
+}
+
+.markdown-body pre code {
+  color: var(--text-body);
+}
+
+.markdown-body :not(pre) > code {
+  background-color: var(--tag-bg);
+  padding: 2px 6px;
+  border-radius: 3px;
+  border: 1px solid var(--border-soft);
 }
