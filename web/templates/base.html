@@ -39,8 +39,19 @@
     </header>
 
     <script>
-      // Color Schemes definition and state
-      const THEMES = ['gruvbox', 'nord', 'rose-pine', 'catppuccin', 'everforest'];
+      // Color Schemes definition (dark and light variants)
+      const THEMES = [
+        'gruvbox',
+        'gruvbox-light',
+        'nord',
+        'nord-light',
+        'rose-pine',
+        'rose-pine-light',
+        'catppuccin',
+        'catppuccin-light',
+        'everforest',
+        'everforest-light'
+      ];
       
       function applyTheme(theme) {
         if (!THEMES.includes(theme)) theme = 'gruvbox';
