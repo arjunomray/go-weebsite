@@ -849,3 +849,157 @@ body {
   border-radius: 3px;
   border: 1px solid var(--border-soft);
 }
+
+/* ==========================================================================
+   Responsive Mobile Media Queries
+   ========================================================================== */
+
+@media (max-width: 640px) {
+  .site-wrapper {
+    padding: 20px 16px 20px 16px;
+  }
+
+  .site-header {
+    margin-bottom: 24px;
+  }
+
+  .header-top {
+    margin-bottom: 16px;
+    align-items: center;
+  }
+
+  .logo {
+    font-size: 19px;
+  }
+
+  .header-avatar {
+    width: 54px;
+    height: 54px;
+  }
+
+  .navbar {
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    padding-bottom: 10px;
+  }
+
+  .nav-link {
+    font-size: 13px;
+    gap: 3px;
+  }
+
+  .nav-key {
+    font-size: 11px;
+  }
+
+  .terminal-table {
+    grid-template-columns: 1fr;
+    row-gap: 2px;
+    margin-bottom: 8px;
+  }
+
+  .terminal-key {
+    font-size: 13px;
+    margin-top: 6px;
+    color: var(--accent);
+  }
+
+  .terminal-val {
+    font-size: 14px;
+    padding-left: 8px;
+  }
+
+  .terminal-text {
+    font-size: 14px;
+    padding-left: 10px;
+  }
+
+  .work-company-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .company-name {
+    font-size: 16px;
+  }
+
+  .work-role-title {
+    font-size: 15px;
+  }
+
+  .work-bullets li {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .blog-row-main {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .blog-row-date {
+    font-size: 12px;
+    width: auto;
+  }
+
+  .blog-row-title {
+    font-size: 14px;
+  }
+
+  .blog-row-tags {
+    padding-left: 0;
+    gap: 6px;
+  }
+
+  .blog-tag-link {
+    font-size: 12px;
+  }
+
+  .library-terminal-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .library-status {
+    width: auto;
+    font-size: 12px;
+  }
+
+  .library-item-title {
+    min-width: 0;
+    font-size: 14px;
+  }
+
+  .library-item-tags {
+    margin-left: 0;
+    gap: 6px;
+  }
+
+  .post-main-title {
+    font-size: 20px;
+  }
+
+  .post-meta-row {
+    flex-wrap: wrap;
+    font-size: 13px;
+  }
+
+  .markdown-body {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .markdown-body pre {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .footer-socials {
+    gap: 12px;
+    font-size: 13px;
+  }
+}
