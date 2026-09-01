@@ -45,41 +45,42 @@ body {
 .site-wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  align-items: center;
   min-height: 100vh;
-  padding: 40px 20px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 24px;
 }
 
 /* Header Elements Grouping */
 .site-header {
   text-align: center;
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .logo {
   font-family: "Bitcount Single", system-ui;
-  font-size: 48px;
+  font-size: 52px;
   font-weight: 500;
   color: var(--accent);
   letter-spacing: -1px;
-  margin-bottom: 15px;
+  margin-bottom: 18px;
 }
 
 /* The Fixed Width Center Box Architecture */
 .navbar {
   display: flex;
   justify-content: center;
-  gap: 24px;
-  max-width: 850px;
+  gap: 32px;
+  width: 100%;
   margin: 0 auto;
-  padding-bottom: 10px;
+  padding-bottom: 12px;
 }
 
 .nav-link {
   color: var(--text-muted);
   text-decoration: none;
-  font-size: 15px;
+  font-size: 16px;
   transition: color 0.15s ease-in-out;
 }
 
@@ -96,15 +97,10 @@ body {
 
 /* Main Block Centering Card */
 .main-content-card {
-  /* background-color: var(--bg-surface); */
-  /* border: 1px solid var(--border-soft); */
-  /* border-radius: 4px; */
   width: 100%;
-  max-width: 600px;
-  /* Centered Box Grid Spec */
   margin: 0 auto;
-  padding: 8px;
-  /* Pushes Footer Down */
+  padding: 12px 0;
+  flex: 1 0 auto;
 }
 
 .hero-view {
@@ -112,6 +108,12 @@ body {
   flex-direction: column;
   justify-content: start;
   align-items: center;
+  gap: 24px;
+}
+
+.hero-view h2 {
+  font-size: 24px;
+  color: var(--text-head);
 }
 
 .hero-content {
@@ -120,19 +122,26 @@ body {
   justify-content: start;
   align-items: center;
   text-align: center;
-  gap: 20px
+  gap: 24px;
+  max-width: 680px;
+  font-size: 17px;
+  line-height: 1.8;
 }
 
 .hero-image {
-  height: 100px;
-  width: 100px;
+  height: 130px;
+  width: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-soft);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Footer Section formatting */
 .site-footer {
-  max-width: 800px;
   width: 100%;
-  margin: 40px auto 0 auto;
+  margin-top: auto;
+  padding-top: 48px;
   font-size: 13px;
   color: var(--text-muted);
 }
@@ -191,23 +200,23 @@ body {
   flex-direction: column;
   justify-content: start;
   width: 100%;
-  max-width: 600px;
+  max-width: 780px;
+  margin: 0 auto 30px auto;
   font-size: 16px;
   color: var(--text-head);
-  margin-top: 0;
-  margin-bottom: 25px;
   font-weight: 600;
 }
 
 .index-grid {
   display: flex;
   flex-direction: column;
-  gap: 25px;
+  gap: 28px;
+  width: 100%;
 }
 
 .index-item {
   border-bottom: 1px dashed var(--border-soft);
-  padding-bottom: 20px;
+  padding-bottom: 24px;
 }
 
 .index-item:last-child {
@@ -216,15 +225,15 @@ body {
 }
 
 .item-date {
-  font-size: 12px;
+  font-size: 13px;
   color: var(--text-muted);
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
 
 .index-item h3 {
-  margin: 0 0 8px 0;
-  font-size: 18px;
+  margin: 0 0 10px 0;
+  font-size: 20px;
 }
 
 .index-item h3 a {
@@ -237,27 +246,28 @@ body {
 }
 
 .index-item p {
-  margin: 0 0 12px 0;
-  font-size: 14px;
-  line-height: 1.5;
+  margin: 0 0 14px 0;
+  font-size: 15px;
+  line-height: 1.6;
   color: var(--text-body);
 }
 
 /* Tag Management Row layout styling */
 .tags-row {
   display: flex;
-  gap: 8px;
+  gap: 10px;
   flex-wrap: wrap;
 }
 
 .tag-flag {
-  font-size: 11px;
+  font-size: 12px;
   background-color: var(--tag-bg);
   color: #fabd2f;
   /* Gruvbox Warm Yellow Accents */
-  padding: 2px 6px;
-  border-radius: 3px;
+  padding: 3px 8px;
+  border-radius: 4px;
   text-decoration: none;
+  transition: background-color 0.15s ease;
 }
 
 .tag-flag:hover {
@@ -265,9 +275,15 @@ body {
 }
 
 /* --- Full Document Reading View Layout --- */
+.reading-view {
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
 .reading-view h1 {
   color: var(--text-head);
-  font-size: 22px;
+  font-size: 26px;
 }
 
 .console-link {
@@ -281,18 +297,18 @@ body {
 }
 
 .markdown-body {
-  line-height: 1.6;
-  font-size: 14px;
+  line-height: 1.7;
+  font-size: 15px;
 }
 
 .markdown-body p {
-  margin: 15px 0;
+  margin: 18px 0;
 }
 
 .markdown-body h1,
 .markdown-body h2,
 .markdown-body h3 {
   color: var(--text-head);
-  margin-top: 25px;
-  margin-bottom: 10px;
+  margin-top: 32px;
+  margin-bottom: 12px;
 }
