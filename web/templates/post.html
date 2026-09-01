@@ -2,7 +2,7 @@
 <div class="hero-view">
   <div class="hero-content">
     <div class="terminal-section">
-      <div class="terminal-prompt"><span class="prompt-symbol">$</span>cat {{ if eq .Page "library" }}library{{ else }}blogs{{ end }}/{{ .Title }}.md</div>
+      <div class="terminal-prompt"><span class="prompt-symbol">$</span>cat {{ if eq .Page "library" }}library{{ else }}blogs{{ end }}/{{ .Slug }}.md</div>
 
       <div class="terminal-divider"></div>
 
