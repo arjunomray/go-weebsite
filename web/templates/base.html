@@ -93,14 +93,6 @@
 
         const transition = document.startViewTransition(updateDOM);
 
-        // Spawn anime girl mascot pop-in
-        const mascot = document.createElement('div');
-        mascot.className = 'anime-theme-mascot';
-        document.body.appendChild(mascot);
-        setTimeout(() => {
-          if (mascot && mascot.parentNode) mascot.parentNode.removeChild(mascot);
-        }, 850);
-
         transition.ready.then(() => {
           document.documentElement.animate(
             {
