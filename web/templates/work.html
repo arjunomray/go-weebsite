@@ -1,0 +1,42 @@
+{{ define "content" }}
+<div class="hero-view">
+  <div class="hero-content">
+    <div class="terminal-section">
+      <div class="terminal-prompt"><span class="prompt-symbol">$</span>career --log</div>
+      <div class="terminal-text">
+        <div class="work-company-header">
+          <span class="company-name">Agniverse AI</span>
+          <span class="company-meta">Estonia &middot; Full-time</span>
+        </div>
+
+        <div class="work-role-block">
+          <div class="work-role-title">Founding Engineer</div>
+          <div class="work-role-timeline">timeline: Jul 2025 &ndash; Aug 2026</div>
+          <ul class="work-bullets">
+            <li><span class="arrow">&rarr;</span>Built and shipped backend services for mobile apps using Node.js (Express, Fastify)</li>
+            <li><span class="arrow">&rarr;</span>Set up and managed PostgreSQL as a database layer for new services</li>
+            <li><span class="arrow">&rarr;</span>Set up authentication using Supabase and Firebase Auth</li>
+            <li><span class="arrow">&rarr;</span>Deployed and managed infrastructure on AWS</li>
+            <li><span class="arrow">&rarr;</span>Deployed and maintained self-hosted Ghost blog instances on a VPS</li>
+            <li><span class="arrow">&rarr;</span>Integrated analytics via Mixpanel and PostHog</li>
+            <li><span class="arrow">&rarr;</span>Built internal tooling to automate the media team's workflows</li>
+          </ul>
+        </div>
+
+        <div class="work-role-divider"></div>
+
+        <div class="work-role-block">
+          <div class="work-role-title">Backend Product Intern</div>
+          <div class="work-role-timeline">timeline: Nov 2024 &ndash; Jun 2025</div>
+          <ul class="work-bullets">
+            <li><span class="arrow">&rarr;</span>Built initial backend services for mobile apps using Node.js and Express</li>
+            <li><span class="arrow">&rarr;</span>Set up and managed MongoDB as the initial database layer</li>
+            <li><span class="arrow">&rarr;</span>Handled early AWS deployment setup</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{ end }}
+{{ template "templates/base.html" . }}

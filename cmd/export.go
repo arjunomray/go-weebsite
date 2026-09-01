@@ -66,6 +66,15 @@ func (app *App) ExportStatic(outDir string) error {
 		return err
 	}
 
+	// 3b. Render Work page
+	if err := writePage("work/index.html", "templates/work.html", PageData{
+		Title:       "Work",
+		Description: "Career log and professional engineering experience.",
+		Page:        "work",
+	}); err != nil {
+		return err
+	}
+
 	// 4. Render Blogs list
 	if err := writePage("blogs/index.html", "templates/blogs.html", map[string]any{
 		"Title":       "blogs",
@@ -128,7 +137,8 @@ func (app *App) ExportStatic(outDir string) error {
 	}
 
 	// 9. Write Cloudflare Pages _redirects for clean URLs (no trailing slash needed)
-	redirects := "/blogs /blogs/index.html 200\n"
+	redirects := "/work /work/index.html 200\n"
+	redirects += "/blogs /blogs/index.html 200\n"
 	redirects += "/library /library/index.html 200\n"
 	for _, post := range BlogPosts {
 		redirects += fmt.Sprintf("/blog/%s /blog/%s/index.html 200\n", post.Slug, post.Slug)

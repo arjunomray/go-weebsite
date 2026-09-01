@@ -60,6 +60,15 @@ func (app *App) HomeHandler(w http.ResponseWriter, r *http.Request) {
 	app.Render(w, "templates/home.html", pageData)
 }
 
+func (app *App) WorkHandler(w http.ResponseWriter, r *http.Request) {
+	pageData := PageData{
+		Title:       "Work",
+		Description: "Career log and professional engineering experience.",
+		Page:        "work",
+	}
+	app.Render(w, "templates/work.html", pageData)
+}
+
 // BLOG ROUTING
 func (app *App) BlogListHandler(w http.ResponseWriter, r *http.Request) {
 	tag := r.URL.Query().Get("tag")

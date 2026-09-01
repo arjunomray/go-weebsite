@@ -39,7 +39,7 @@
     </header>
 
     <script>
-      // Global navigation keybindings: [m] -> /me, [b] -> /blogs, [l] -> /library
+      // Global navigation keybindings: [m] -> /me, [w] -> /work, [b] -> /blogs, [l] -> /library
       document.addEventListener('keydown', function(e) {
         if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName) || e.metaKey || e.ctrlKey || e.altKey) {
           return;
@@ -47,6 +47,9 @@
         const key = e.key.toLowerCase();
         if (key === 'm') {
           const link = document.querySelector('a[data-key="m"]');
+          if (link) link.click();
+        } else if (key === 'w') {
+          const link = document.querySelector('a[data-key="w"]');
           if (link) link.click();
         } else if (key === 'b') {
           const link = document.querySelector('a[data-key="b"]');
