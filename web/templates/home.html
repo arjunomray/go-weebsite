@@ -1,15 +1,21 @@
 {{ define "content" }}
 <div class="hero-view">
-  <h2>welcome to my abode</h2>
   <div class="hero-content">
-    <img class="hero-image" src="/static/images/img.jpg">
-    <p>I am Arjun 🙌
-      <br>
-      I am a software dev from India.
-      <br>
-      When I am not trying to build the next big thing, you can find me reading books, playing video games or
-      meditating.
-    </p>
+    <h2>welcome to my abode</h2>
+
+    <div class="terminal-section">
+      <div class="terminal-prompt"><span class="prompt-symbol">$</span>whoami</div>
+      <div class="terminal-text">
+        Arjun &mdash; full-stack engineer, currently building on Node.js/TypeScript, Fastify, and MongoDB. Occasionally detour into Go + GraphQL just to see how the other half lives.
+      </div>
+    </div>
+
+    <div class="terminal-section">
+      <div class="terminal-prompt"><span class="prompt-symbol">$</span>status</div>
+      <div class="terminal-text">
+        Building things, reading Dune, losing to Persona 5 Royal's final boss.
+      </div>
+    </div>
   </div>
 </div>
 {{ end }}
