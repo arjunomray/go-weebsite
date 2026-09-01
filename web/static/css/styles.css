@@ -236,14 +236,23 @@ body {
 
 .footer-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  width: 100%;
+}
+
+.footer-socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
 }
 
 .footer-socials a {
   color: var(--text-muted);
   text-decoration: none;
-  margin-left: 15px;
+  font-size: 14px;
+  transition: color 0.15s ease-in-out;
 }
 
 .footer-socials a:hover {
