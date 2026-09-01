@@ -70,6 +70,8 @@ func InitContentDatabase(dirPath string) ([]ContentItem, error) {
 				item.Summary = val
 			case "stage":
 				item.Stage = strings.TrimSpace(strings.ToLower(val))
+			case "status":
+				item.Status = strings.TrimSpace(val)
 			case "date":
 				item.Date, _ = time.Parse("2006-01-02", val)
 			case "tags":

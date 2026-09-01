@@ -13,7 +13,8 @@ type ContentItem struct {
 	Summary     string   // Brief card snippet
 	BodyHTML    string   // The parsed HTML block
 	Stage       string
-	ReadingTime int // Estimated reading time in minutes
+	Status      string // e.g. "reread (again)", "reading", "finished"
+	ReadingTime int    // Estimated reading time in minutes
 }
 
 // Global memory stores for blazing fast routing

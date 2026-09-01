@@ -15,7 +15,7 @@
       <div class="library-terminal-list">
         {{ range .Media }}
         <div class="library-terminal-row">
-          <span class="library-status">{{ if eq .Stage "published" }}finished{{ else }}{{ .Stage }}{{ end }}</span>
+          <span class="library-status">{{ if .Status }}{{ .Status }}{{ else if eq .Stage "published" }}finished{{ else }}{{ .Stage }}{{ end }}</span>
           <a href="/library/{{ .Slug }}" class="library-item-title">{{ .Title }}</a>
           {{ if .Tags }}
           <div class="library-item-tags">
