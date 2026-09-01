@@ -44,7 +44,7 @@ func (app *App) Custom404(next *http.ServeMux) http.Handler {
 		// }
 		if _, p := next.Handler(r); p == "GET /" && r.URL.Path != "/" {
 			w.WriteHeader(http.StatusNotFound)
-			app.Render(w, "templates/404.html", "")
+			app.Render(w, "templates/404.html", PageData{Title: "404 Not Found"})
 			return
 		}
 		next.ServeHTTP(w, r)

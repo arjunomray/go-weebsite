@@ -1,2 +1,7 @@
 dist/
 .vercel
+result
+result-*
+.wrangler/
+
+

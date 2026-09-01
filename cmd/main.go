@@ -48,6 +48,17 @@ func main() {
 		templates: t,
 	}
 
+	if len(os.Args) > 1 && (os.Args[1] == "export" || os.Args[1] == "--export") {
+		outDir := "dist"
+		if len(os.Args) > 2 {
+			outDir = os.Args[2]
+		}
+		if err := app.ExportStatic(outDir); err != nil {
+			log.Fatalf("Export error: %v", err)
+		}
+		return
+	}
+
 	handler := http.ServeMux{}
 	wrapped := LoggingMiddleware(app.Custom404(&handler))
 

@@ -1,6 +1,13 @@
 
 build:
-	go build -o dist/server cmd/main.go
-    
+	go build -o dist/server cmd/*.go
+
 run:
-	go run cmd/main.go
+	go run cmd/*.go
+
+export:
+	go run cmd/*.go export
+
+deploy: export
+	wrangler pages deploy dist --project-name go-weebsite
+
